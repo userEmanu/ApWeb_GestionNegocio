@@ -2,12 +2,39 @@ from django.shortcuts import render, redirect
 from appTienda.models import Categoria, Producto
 # Create your views here.
 
+"""
+Renderiza la plantilla inicio.html y devuelve la respuesta HTML renderizada.
+
+Parameters:
+    request (HttpRequest): El Objetos de solicitud HTTP.
+
+Returns:
+    HttpResponse: La respuesta del html renderizado.
+"""
 def inicio(request):
     return render(request,"inicio.html")
 
+"""
+Renderiza la plantilla frmCategoria.html y devuelve la respuesta HTML renderizada.
+
+Parameters:
+    request (HttpRequest): El Objetos de solicitud HTTP.
+
+Returns:
+    HttpResponse: La respuesta del html renderizado.
+"""
 def vistaCategorias(request):
     return render(request,"frmCategoria.html")
 
+"""
+Crea un nueva instancia del modelo Categoria y lo guarda en la base de datos.
+
+Parameters:
+    request (HttpRequest): El Objeto de solicitud HTTP que contiene los datos POST
+
+Returns:
+    HttpResponse: La respuesta HTML renderizada de la plantilla frmCategoria.html con un mensaje de éxito o error.
+"""
 def agregarCategoria(request):
     nombre = request.POST["txtNombre"]
     try:
@@ -48,13 +75,13 @@ def agregarProducto(request):
         foto = request.FILES.get('fileFoto')
         categorias = Categoria.objects.get(id=idCategoria)
         
-        # Corrección: Crear una instancia del Producto y asignar la imagen usando la clase File
+        # Crea una instancia del Producto y asigna la imagen usando la clase File
         producto = Producto(
             proNombre=nombre, 
             proCodigo=codigo, 
             proPrecio=precio,
             proCategoria=categorias,
-            proFoto=foto,  # Asignar la imagen
+            proFoto=foto
         )
         producto.save()
         
@@ -84,7 +111,6 @@ def actualizarProducto(request):
     precio = int(request.POST["txtPrecio"])
     idCategoria = int(request.POST["cbCategoria"])
     archivo = request.FILES.get("fileFoto", False)
-    
     try:
         categoria = Categoria.objects.get(id = idCategoria)
         producto = Producto.objects.get(id = idProducto)
