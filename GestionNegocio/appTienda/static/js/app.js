@@ -22,22 +22,7 @@ function abrirModalEliminar(idProducto){
         }
       })
 }
-// function abrirModalEditar(idProducto){
-//     Swal.fire({
-//         title: 'Editar Producto',
-//         text: "¿Estan seguros de Editar?",
-//         icon: 'warning',
-//         showCancelButton: true,
-//         confirmButtonColor: '#3085d6',
-//         cancelButtonColor: '#d33',
-//         cancelButtonText: 'No',
-//         confirmButtonText: 'Si'
-//       }).then((result) => {
-//         if (result.isConfirmed) {
-//            location.href="/consultarProducto/"+idProducto+"/"
-//         }
-//       })
-// }
+
 
 
 function validarImagen(evt) {
